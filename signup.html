@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://connect.facebook.net/en_US/sdk.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('About img_files/what4.jpg') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .signup-box {
+            background-color: rgba(247, 243, 246, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .signup-box h2 {
+            color: rgb(18, 17, 17);
+            text-align: center;
+        }
+        .input-box {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid purple;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .signup-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(90, 139, 119);
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-btn:hover {
+            background-color: rgb(25, 177, 86);
+        }
+        .social-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-login button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .google-btn {
+            background-color: #db4437;
+            color: white;
+        }
+        .facebook-btn {
+            background-color: #4267B2;
+            color: white;
+        }
+        .resend-otp {
+            text-align: center;
+            margin-top: 10px;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signup-box">
+            <h2>Create An Account</h2>
+            <div class="input-box">
+                <label>First Name:</label>
+                <input type="text" placeholder="Enter your first name">
+            </div>
+            <div class="input-box">
+                <label>Last Name:</label>
+                <input type="text" placeholder="Enter your last name">
+            </div>
+            <div class="input-box">
+                <label>Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <button class="signup-btn" onclick="sendOTP()">Send OTP</button>
+            <div class="input-box" id="otp-box" style="display:none;">
+                <label>Enter OTP:</label>
+                <input type="password" id="otp" placeholder="Enter OTP">
+                <span class="toggle-password" onclick="toggleOTP()"></span>
+            </div>
+            <button class="signup-btn" id="verify-btn" style="display:none;" onclick="verifyOTP()">Verify OTP</button>
+            <div class="resend-otp" id="resend-otp" style="display:none;" onclick="sendOTP()">Resend OTP</div>
+            <div class="social-login">
+                <button class="google-btn" onclick="googleSignup()">Sign up with Google</button>
+                <button class="facebook-btn" onclick="facebookSignup()">Sign up with Facebook</button>
+            </div>
+            <div id="user-info" style="text-align:center; margin-top:10px; display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function sendOTP() {
+            let email = document.getElementById("email").value;
+            if(email) {
+                alert("OTP sent to " + email);
+                document.getElementById("otp-box").style.display = "block";
+                document.getElementById("verify-btn").style.display = "block";
+                document.getElementById("resend-otp").style.display = "block";
+            } else {
+                alert("Please enter your email.");
+            }
+        }
+        
+        function verifyOTP() {
+            let otp = document.getElementById("otp").value;
+            if(otp == "123456") { 
+                alert("OTP Verified! Redirecting...");
+                window.location.href = "shopping.html";
+            } else {
+                alert("Invalid OTP. Try again.");
+            }
+        }
+
+        function googleSignup() {
+            let userInfo = "User signed up with Google: user@example.com";
+            document.getElementById("user-info").innerText = userInfo;
+            document.getElementById("user-info").style.display = "block";
+            alert("Google Signup Success!");
+        }
+
+        function facebookSignup() {
+            let userInfo = "User signed up with Facebook: fbuser@example.com";
+            document.getElementById("user-info").innerText = userInfo;
+            document.getElementById("user-info").style.display = "block";
+            alert("Facebook Signup Success!");
+        }
+        
+        function toggleOTP() {
+            let otpField = document.getElementById("otp");
+            if (otpField.type === "password") {
+                otpField.type = "text";
+            } else {
+                otpField.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
